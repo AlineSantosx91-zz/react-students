@@ -9,12 +9,31 @@ const API = 'https://private-785c05-learnit.apiary-mock.com';
 
 class App extends React.Component {
  
+  // state = {
+  //   students: [
+  //     {
+  //       nome: 'nome'
+  //     }
+  //   ]
+  // }
+  
   state = {
-    students: [
-      {
-        nome: 'nome'
-      }
-    ]
+    students: []
+  }
+
+  listStudents = () =>{
+  //  console.log( this.API.concat('/students');
+    axios.get(`${API}/students`).then(response =>{
+      this.setState({
+        students: response.data,
+      })
+    }).catch(error => {
+
+    });
+  }
+
+  componentDidMount(){
+    this.listStudents();
   }
 
   addStudent = (student) => {
